@@ -43,6 +43,7 @@ Still early days - I've got the motors picked out and a rough CAD design, but th
 | **JST Connectors** | JST-XH 2.54mm kit | [Amazon](https://www.amazon.com/dp/B0731MZCGF) | 1 pack |
 | **LiPo Charger** | Generic 3S LiPo Battery Charger | [Amazon](https://www.amazon.com/dp/B0B5GRRY59) | 1 pack |
 | **Camera** | ESP32-CAM module | [Amazon](https://www.amazon.com/dp/B0948ZFTQZ) | 1 pack |
+| **WAGOs** | WAGO Wire Connectors | [Amazon](https://www.amazon.com/dp/B0CJ5QF3VX) | 1 pack
 
 **Notes:**
 
@@ -58,24 +59,18 @@ STL files will go in `/stl` once they're ready. Or  I'll do 3mf files,  I dont k
 | Main Body | 1 | PLA or PETG, 20% infill |
 | Motor Plates | 2 | 50% infill |
 
-Print at 0.2mm layer height, 50mm/s, with supports where needed.
+Print at 0.2mm layer height with supports where needed.
 
 ## Wiring
 
 Basic idea:
 
-```
-Battery → Switch → Motor Driver → Motors
-                 ↓
-         5V Buck Converter → MCU + LEDs
-```
+![Diagram:](images/R6-Drone-Wiring-Colors-Fixed.png)
+### Note:
+- Don't mind how some of the wires are blocky, that was just to help make the diagram cleaner.
+ - This is without any switches or extras. This  is purely just to see if it moves
+ - This also doesnt include the logic wires, but hopefully that will be fixed soon. Along with a better diagram.
 
-Tentative pin assignments (Arduino/ESP32):
-
-- D2, D3: Motor 1 (PWM)
-- D4, D5: Motor 2 (PWM)
-- D6: LEDs
-- A0: Battery voltage (via divider)
 
 ## Assembly
 
