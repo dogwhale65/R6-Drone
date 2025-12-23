@@ -3,7 +3,8 @@
 An open-source recreation of the surveillance drone from Rainbow Six Siege.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+[![GitHub stars](https://img.shields.io/github/stars/dogwhale65/r6-drone)](https://github.com/dogwhale65/r6-drone/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/dogwhale65/r6-drone)](https://github.com/dogwhale65/r6-drone/issues)
 ![R6 Drone Banner](images/banner.png)
 
 ## About
