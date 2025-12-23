@@ -25,27 +25,12 @@ Still early days - I've got the motors picked out and a rough CAD design, but th
 
 ## Parts List
 
-### Motors
-
-I went with these DC geared motors:
-
-- **Model:** 12V 550RPM with 37mm gearbox
-- **Link:** [Amazon](https://www.amazon.com/Greartisan-Electric-Reduction-Centric-Diameter/dp/B072R5G5GR)
-- **Qty:** 2
-
-Specs:
-
-- 12V DC, 550 RPM
-- 0.7 kg·cm torque
-- 0.5A rated current
-- 6×14mm D-shaped output shaft
-- 1:9 reduction ratio
-
 ### Electronics
 
 | Component | Model | Link | Qty |
 | ----------- | ------- | ------ | ----- |
 | **Battery** | 11.1V 3S LiPo 2200mAh | [Amazon](https://www.amazon.com/dp/B07MQT6YJN) | 1 pack |
+| **Motor** | 12V 550RPM | [Amazon](https://www.amazon.com/dp/B072R5G5GR) | 2 Motors |
 | **Motor Driver** | L298N H-Bridge | [Amazon](https://www.amazon.com/WWZMDiB-L298N-H-Bridge-Controller-Raspberry/dp/B0CR6BX5QL) | 1 pack|
 | **Microcontroller** | ESP32-S3 Dev  Board | [Amazon](https://www.amazon.com/dp/B0C9GLDCRC?th=1) | 1 pack |
 | **Buck Converter** | LM2596 DC-DC | [Amazon](https://www.amazon.com/dp/B08NV3JCBC) | 1 pack |
