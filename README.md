@@ -15,6 +15,8 @@ Still early days — I've got the motors picked out and a rough CAD design, but 
 
 The drone was designed to fit on the BambuLab P1S, so it may not be perfectly accurate to the game. If anyone has the correct dimensions and would like to share them, I'm all ears.
 
+I am also *not* and engineer, sorry if it doesnt pan out to work. This is my first project I'm deciding to put time into.
+
 ## Progress
 
 - [x] Motor selection
