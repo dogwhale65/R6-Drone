@@ -1,265 +1,129 @@
 # R6 Surveillance Drone
->
-> An open-source recreation of the iconic surveillance drone from Rainbow Six Siege
+
+An open-source recreation of the surveillance drone from Rainbow Six Siege.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Status](https://img.shields.io/badge/Status-In%20Development-orange)](https://github.com/yourusername/r6-drone)
 
 ![R6 Drone Banner](images/banner.png)
-*Work in progress - Image placeholder*
 
-## 📋 Table of Contents
+## What is this?
 
-- [Overview](#overview)
-- [Project Status](#project-status)
-- [Features](#features)
-- [Bill of Materials](#bill-of-materials)
-- [Electronics & Wiring](#electronics--wiring)
-- [3D Printing](#3d-printing)
-- [Assembly Instructions](#assembly-instructions)
-- [Software](#software)
-- [Contributing](#contributing)
-- [License](#license)
+I'm building a functional, 3D-printable version of the drone from R6 Siege. It'll have motorized wheels, LEDs, and maybe a camera if I can fit one in there.
 
-## 🎯 Overview
+Still early days - I've got the motors picked out and a rough CAD design, but there's plenty left to figure out.
 
-This project aims to create a functional, 3D-printable replica of the surveillance drone from Rainbow Six Siege. The drone features motorized wheels, LED lighting, and optional camera capabilities to bring the in-game gadget to life.
-
-**Inspiration:** Rainbow Six Siege tactical surveillance drone
-
-## 🚧 Project Status
-
-**Current Version:** v0.1-alpha
+## Current Progress
 
 - [x] Motor selection
-- [x] Initial CAD design/outline
-- [ ] Complete parts list
-- [ ] Electronics design & wiring diagram
+- [x] Initial CAD design
+- [ ] Finalize parts list
+- [ ] Electronics/wiring diagram
 - [ ] 3D model finalization
-- [ ] Assembly instructions
-- [ ] Software/controller integration
-- [ ] Testing & iteration
+- [ ] Assembly guide
+- [ ] Software
+- [ ] Testing
 
-## ✨ Features
+## Parts List
 
-### Planned Features
+### Motors
 
-- ✅ Motorized wheel system
-- 🔲 LED lighting (authentic R6 styling)
-- 🔲 Optional camera mount
-- 🔲 RC control via smartphone/controller
-- 🔲 Rechargeable battery system
-- 🔲 Sound effects (optional)
-- 🔲 Compact, display-worthy design
+I went with these DC geared motors:
 
-## 🛠️ Bill of Materials
+- **Model:** 12V 550RPM with 37mm gearbox
+- **Link:** [Amazon](https://www.amazon.com/Greartisan-Electric-Reduction-Centric-Diameter/dp/B072R5G5GR)
+- **Qty:** 2
 
-### Motors & Actuators
+Specs:
 
-| Component | Specification | Quantity | Link | Notes |
-|-----------|--------------|----------|------|-------|
-| DC Geared Motor | 12V, 550 RPM, 37mm gearbox | 2 | [Amazon](https://www.amazon.com/Greartisan-Electric-Reduction-Centric-Diameter/dp/B072R5G5GR) | Main drive motors |
+- 12V DC, 550 RPM
+- 0.7 kg·cm torque
+- 0.5A rated current
+- 6×14mm D-shaped output shaft
+- 1:9 reduction ratio
 
-**Motor Specifications:**
+### Electronics
 
-- Voltage: 12V DC
-- Speed: 550 RPM
-- Torque: 0.7 kg·cm
-- Current: 0.5A rated
-- Gearbox: 37mm diameter
-- Output Shaft: 6×14mm D-shaped
-- Reduction Ratio: 1:9
+| Component | Model | Link | Qty |
+| ----------- | ------- | ------ | ----- |
+| **Battery** | 11.1V 3S LiPo 2200mAh | [Amazon](https://www.amazon.com/dp/B07MQT6YJN) | 1 pack |
+| **Motor Driver** | L298N H-Bridge | [Amazon](https://www.amazon.com/WWZMDiB-L298N-H-Bridge-Controller-Raspberry/dp/B0CR6BX5QL) | 1 pack|
+| **Microcontroller** | ESP32-S3 Dev  Board | [Amazon](https://www.amazon.com/dp/B0C9GLDCRC?th=1) | 1 pack |
+| **Buck Converter** | LM2596 DC-DC | [Amazon](https://www.amazon.com/dp/B08NV3JCBC) | 1 pack |
+| **XT60 Connectors** | Male/Female pairs | [Amazon](https://www.amazon.com/dp/B0DB1LBGSH) | 1 pack |
+| **Power Switch** | Rocker switch 10A, 20mm | [Amazon](https://www.amazon.com/dp/B07QQ22DTB) | 1 pack |
+| **Blue LEDs** | 3mm diffused, 12V pre-wired | [Amazon](https://www.amazon.com/dp/B07T8FN8CS) | 1 pack |
+| **Resistor Kit** | Assortment | [Amazon](https://www.amazon.com/dp/B08FD1XVL6) | 1 pack |
+| **Wire** | 18AWG silicone, multi-color | [Amazon](https://www.amazon.com/dp/B08BR454BX?th=1) | 1 pack |
+| **Heat Shrink** | Assorted tubing kit | [Amazon](https://www.amazon.com/dp/B084GDLSCK) | 1 pack |
+| **JST Connectors** | JST-XH 2.54mm kit | [Amazon](https://www.amazon.com/dp/B0731MZCGF) | 1 pack |
+| **LiPo Charger** | Generic 3S LiPo Battery Charger | [Amazon](https://www.amazon.com/dp/B0B5GRRY59) | 1 pack |
+| **Camera** | ESP32-CAM module | [Amazon](https://www.amazon.com/dp/B0948ZFTQZ) | 1 pack |
 
-### Electronics (In Progress)
+**Notes:**
 
-#### Power System
+- LM2596 steps 11.1V → 3.3V for ESP32
 
-| Component | Specification | Quantity | Link | Status |
-|-----------|--------------|----------|------|--------|
-| Battery | 11.1V 3S LiPo (recommended) | 1 | TBD | 🔲 Not selected |
-| Battery Connector | XT60 or similar | 1 | TBD | 🔲 Not selected |
-| Power Switch | SPST, 3A+ rating | 1 | TBD | 🔲 Not selected |
-
-#### Motor Control
-
-| Component | Specification | Quantity | Link | Status |
-|-----------|--------------|----------|------|--------|
-| Motor Driver | Dual H-Bridge (L298N or similar) | 1 | TBD | 🔲 Not selected |
-| Microcontroller | Arduino Nano/ESP32 | 1 | TBD | 🔲 Not selected |
-
-#### Optional Components
-
-| Component | Specification | Quantity | Link | Status |
-|-----------|--------------|----------|------|--------|
-| LEDs | Blue 5mm (for lighting) | 4-6 | TBD | 🔲 Not selected |
-| LED Resistors | 220Ω | 4-6 | TBD | 🔲 Not selected |
-| Camera Module | ESP32-CAM or Raspberry Pi Camera | 1 | TBD | 🔲 Optional |
-| Speaker | Small 8Ω speaker | 1 | TBD | 🔲 Optional |
-
-#### Miscellaneous
-
-| Component | Specification | Quantity | Link | Status |
-|-----------|--------------|----------|------|--------|
-| Wheels/Treads | TBD (custom or commercial) | 2 | TBD | 🔲 Not selected |
-| Wiring | 22-24 AWG stranded wire | 1 set | TBD | 🔲 Not selected |
-| Heat Shrink Tubing | Assorted sizes | 1 set | TBD | 🔲 Not selected |
-| M3 Screws | Various lengths | ~20 | TBD | 🔲 Not selected |
-
-### Electronics Recommendations
-
-Based on your motor selection (12V, 0.5A each = 1A total), here are my recommendations:
-
-**Power System:**
-
-- **Battery:** 11.1V 3S LiPo (1000-1500mAh) - provides good runtime while keeping size compact
-- **Alternative:** 3S 18650 battery pack (12.6V fully charged)
-- **Voltage Regulator:** 5V buck converter for microcontroller/LEDs
-
-**Motor Driver:**
-
-- **Option 1:** L298N Dual H-Bridge (cheap, 2A per channel, overkill for your needs but robust)
-- **Option 2:** DRV8833 Dual H-Bridge (smaller footprint, 1.5A per channel, more efficient)
-- **Option 3:** TB6612FNG (compact, efficient, 1.2A per channel)
-
-**Microcontroller:**
-
-- **Basic Version:** Arduino Nano (simple, well-documented)
-- **WiFi Version:** ESP32 (enables smartphone control, camera streaming)
-- **Advanced:** Raspberry Pi Zero W (full Linux, better camera support)
-
-**Additional Circuit Protection:**
-
-- Fuse or PTC resettable fuse (2A rating)
-- Capacitors (100µF across motor terminals to reduce electrical noise)
 
 ### 3D Printed Parts
 
-*Coming soon - STL files will be available in the `/stl` folder*
+STL files will go in `/stl` once they're ready. Or  I'll do 3mf files,  I dont know yet.
 
-| Part Name | Quantity | Material | Infill | Notes |
-|-----------|----------|----------|--------|-------|
-| Main Body | 1 | PLA/PETG | 20% | TBD |
-| Bottom Chassis | 1 | PLA/PETG | 30% | TBD |
-| Wheel Mount | 2 | PLA/PETG | 30% | TBD |
-| Camera Housing | 1 | PLA/PETG | 15% | TBD (optional) |
-| LED Diffusers | 4 | Clear PLA/PETG | 15% | TBD |
+| Part | Qty | Notes |
+|------|-----|-------|
+| Main Body | 1 | PLA or PETG, 20% infill |
+| Motor Plates | 2 | 50% infill |
 
-**Recommended Print Settings:**
+Print at 0.2mm layer height, 50mm/s, with supports where needed.
 
-- Layer Height: 0.2mm
-- Print Speed: 50mm/s
-- Supports: Yes (where needed)
-- Bed Adhesion: Brim recommended
+## Wiring
 
-## 🔌 Electronics & Wiring
-
-### Basic Wiring Diagram
+Basic idea:
 
 ```
-[Battery] ─┬─ [Switch] ─┬─ [Motor Driver] ─┬─ [Motor 1]
-           │             │                   └─ [Motor 2]
-           │             │
-           └─ [5V Buck Converter] ─┬─ [Microcontroller]
-                                    └─ [LEDs + Resistors]
+Battery → Switch → Motor Driver → Motors
+                 ↓
+         5V Buck Converter → MCU + LEDs
 ```
 
-*Detailed wiring diagrams coming soon*
+Tentative pin assignments (Arduino/ESP32):
 
-### Pin Assignments (Tentative)
+- D2, D3: Motor 1 (PWM)
+- D4, D5: Motor 2 (PWM)
+- D6: LEDs
+- A0: Battery voltage (via divider)
 
-```
-Arduino/ESP32 Pins:
-- D2, D3: Motor 1 control (PWM)
-- D4, D5: Motor 2 control (PWM)
-- D6: LED control (PWM for dimming)
-- A0: Battery voltage monitoring (voltage divider)
-```
+## Assembly
 
-## 🖨️ 3D Printing
+Rough order of operations:
 
-### STL Files
+1. Print everything.
+2. Test fit before committing
+3. Install motors to plates.
+4. Wire up the electronics.
+5. Test motors work.
+6. Screw Plates to Body.
+7. Close body up
+8. Test.
 
-*Files will be uploaded to `/stl` folder once finalized*
+Detailed guide coming once I actually build the thing.
 
-**Printing Tips:**
+## Software
 
-1. Print chassis parts in PETG for better durability
-2. Use tree supports for complex geometries
-3. Test fit all parts before final assembly
-4. Consider printing wheels in TPU for better traction
+Will add code once I get there. Planning for:
 
-### Assembly Order (Draft)
-
-1. Print all parts
-2. Install motor mounts in chassis
-3. Mount motors with M3 screws
-4. Install motor driver and microcontroller
-5. Wire electronics according to diagram
-6. Test motor movement
-7. Install wheels
-8. Add LED lighting
-9. Close chassis and final assembly
-
-*Detailed assembly guide with photos coming soon*
-
-## 💻 Software
-
-*Code repository coming soon*
-
-### Planned Features
-
-- Basic motor control
-- Speed adjustment
+- Motor control
 - LED effects
-- Battery monitoring
-- Optional: WiFi control via smartphone app
-- Optional: Camera streaming
+- Battery monitoring?
+- WiFi/app control
 
-### Development Environment
+## Disclaimer
 
-- Arduino IDE or PlatformIO
-- Libraries: TBD
+Fan project, not affiliated with Ubisoft. Just for fun.
 
-## 🤝 Contributing
+## License
 
-This project is in early development and contributions are welcome!
-
-**How to contribute:**
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-**Areas where help is needed:**
-
-- Electronics design optimization
-- Code development
-- Testing and iteration
-- Documentation
-- 3D model refinement
-
-## ⚠️ Disclaimer
-
-This is a fan project and is not affiliated with or endorsed by Ubisoft or Rainbow Six Siege. This project is for educational and entertainment purposes only.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Rainbow Six Siege by Ubisoft for the inspiration
-- The maker community for tools and knowledge
-- Contributors and testers (you!)
-
-## 📞 Contact
-
-Project Link: [https://github.com/dogwhale65/r6-drone](https://github.com/dogwhale65/r6-drone)
+MIT - see [LICENSE](LICENSE).
 
 ---
 
-**Star ⭐ this repository if you find it interesting!**
-
-*Last updated: December 2024*
+Project: [github.com/dogwhale65/r6-drone](https://github.com/dogwhale65/r6-drone)
