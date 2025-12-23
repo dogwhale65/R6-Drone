@@ -47,7 +47,7 @@ I am also *not* and engineer, sorry if it doesnt pan out to work. This is my fir
 | Heat Shrink | Assorted tubing kit | [Amazon](https://www.amazon.com/dp/B084GDLSCK) | 1 pack |
 | JST Connectors | JST-XH 2.54mm kit | [Amazon](https://www.amazon.com/dp/B0731MZCGF) | 1 pack |
 | LiPo Charger | 3S Charger | [Amazon](https://www.amazon.com/dp/B0B5GRRY59) | 1 |
-| Camera | ESP32-CAM module | [Amazon](https://www.amazon.com/dp/B0948ZFTQZ) | 1 |
+| Camera | Generic Camera Module | [Amazon](www.amazon.com/dp/B012UXNDOY) | 1 |
 | Wire Connectors | Lever nuts | [Amazon](https://www.amazon.com/dp/B0CJ5QF3VX) | 1 pack |
 
 ### 3D Printed Parts
