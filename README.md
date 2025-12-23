@@ -16,8 +16,8 @@ Still early days - I've got the motors picked out and a rough CAD design, but th
 
 - [x] Motor selection
 - [x] Initial CAD design
-- [ ] Finalize parts list
-- [ ] Electronics/wiring diagram
+- [X] Finalize parts list
+- [X] Electronics/wiring diagram
 - [ ] 3D model finalization
 - [ ] Assembly guide
 - [ ] Software
