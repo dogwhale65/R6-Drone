@@ -50,6 +50,8 @@ I am also *not* and engineer, sorry if it doesnt pan out to work. This is my fir
 | Camera | Generic Camera Module | [Amazon](https://www.amazon.com/dp/B012UXNDOY) | 1 |
 | Wire Connectors | Lever nuts | [Amazon](https://www.amazon.com/dp/B0CJ5QF3VX) | 1 pack |
 
+>Also the motors I picked out were kind of crappy. Some of the mount holes go straight into the gearbox and the screws hit the internals, just be careful with that. It will prevent the motor from spinning if it happens to you. One screw should hold everything in fine though, although more is better.
+
 ### 3D Printed Parts
 
 Individual 3MF files are in `/3mf`. There's also a ready-to-print 3MF in the root folder with all parts pre-positioned and print settings configured.
@@ -60,7 +62,7 @@ Individual 3MF files are in `/3mf`. There's also a ready-to-print 3MF in the roo
 | ---- | --- | ----- |
 | Main Body Top | 1 | PLA or PETG, 20% infill |
 | Main Body Bottom | 1 | PLA or PETG, 20% infill |
-| Motor Plates | 2 | 50% infill |
+| Motor Plates | 2 | PLA or PETG 50% infill |
 | Wheels | 2 | TPU, 20% infill |
 
 Print at 0.2mm layer height with supports where needed.
@@ -71,35 +73,23 @@ Print at 0.2mm layer height with supports where needed.
 
 **Notes:**
 
-- The blocky wires in the diagram are just for visual clarity.
-- This version doesn't include switches or extras — it's purely to verify movement.
-- Logic wires aren't shown yet, but I'll add them in a future revision.
+- This version doesn't include switches or extras.
+- Logic wires aren't shown yet, but I'll add them in a future revision (hopefully).
+- In my first build I messed up my ESP32 and broke the 5V connection. I ended up using another buck converter and using the 3.3V input on it.
 
 ## Assembly
 
-1. Print all parts
-2. Test fit before committing
-3. Install motors to plates
-4. Wire up the electronics
-5. Test that motors work
-6. Attach plates to body
-7. Close up the body
-8. Final test
+> Note: I had a crap ton of M3 x 20mm screws lying around, so I used those. You can probably use shorter screws for the motor plates but for the main body I'd recommend using at least 20mm screws.
 
-Detailed guide coming once I actually build the thing.
+1. Screw the motor plates to the motors, making sure that the motor can still spin.
+2. Screw the motor plates to the bottom half of the main body.
+3. Put the electronics into the main body. I just stuffed everything in there haphazardly
+4. Screw the top half of the main body to the motor plates.
+5. Screw the middle of the main bodies together.
 
-## Software
+## Code
 
-Code coming soon. Planning for:
-
-- Motor control
-- LED effects
-- Battery monitoring
-- WiFi/app control
-
-## Disclaimer
-
-Fan project, not affiliated with Ubisoft. Just for fun.
+The code is in `/code`. It's a simple web server that controls the robot. You can connect to the robot's WiFi and then connect to the web server to control it. It has joystick controls for throttle and rotation, or you can use WASD keys on a computer for throttle and rotation.
 
 ## License
 
