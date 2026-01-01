@@ -9,13 +9,13 @@ An open-source recreation of the surveillance drone from Rainbow Six Siege.
 
 ## About
 
-I'm building a functional, 3D-printable version of the drone from R6 Siege. It'll have motorized wheels, LEDs, and maybe a camera if I can fit one in there.
+I'm building a functional, 3D-printable version of the drone from R6 Siege. It features motorized wheels, LEDs, and a camera for FPV control.
 
 Still early days — I've got the motors picked out and a rough CAD design, but there's plenty left to figure out.
 
-The drone was designed to fit on the BambuLab P1S, so it may not be perfectly accurate to the game. If anyone has the correct dimensions and would like to share them, I'm all ears.
+The drone was designed to fit on a BambuLab P1S, so it may not be perfectly accurate to the in-game model. If anyone has the correct dimensions and wants to share them, I'm all ears!
 
-I am also *not* and engineer, sorry if it doesnt pan out to work. This is my first project I'm deciding to put time into.
+I'm also *not* an engineer, so apologies if things don't work out perfectly. This is my first real project, and I'm learning as I go.
 
 ## Progress
 
@@ -24,8 +24,8 @@ I am also *not* and engineer, sorry if it doesnt pan out to work. This is my fir
 - [x] Finalize parts list
 - [x] Electronics/wiring diagram
 - [ ] 3D model finalization
-- [ ] Assembly guide
-- [ ] Software
+- [X] Assembly guide
+- [X] Software
 - [ ] Testing
 
 ## Parts List
@@ -50,13 +50,13 @@ I am also *not* and engineer, sorry if it doesnt pan out to work. This is my fir
 | Camera | Generic Camera Module | [Amazon](https://www.amazon.com/dp/B012UXNDOY) | 1 |
 | Wire Connectors | Lever nuts | [Amazon](https://www.amazon.com/dp/B0CJ5QF3VX) | 1 pack |
 
->Also the motors I picked out were kind of crappy. Some of the mount holes go straight into the gearbox and the screws hit the internals, just be careful with that. It will prevent the motor from spinning if it happens to you. One screw should hold everything in fine though, although more is better.
+> **Heads up:** The motors I picked have a design flaw — some mount holes go straight into the gearbox, so screws can hit the internals and prevent the motor from spinning. 
 
 ### 3D Printed Parts
 
 Individual 3MF files are in `/3mf`. There's also a ready-to-print 3MF in the root folder with all parts pre-positioned and print settings configured.
 
-> **Note:** These parts haven't been tested yet. I'm adding them now for simplicity's sake. If you want to take the leap of faith that everything will work, be my guest!
+> **Note:** These parts haven't been fully tested yet. Build at your own risk!
 
 | Part | Qty | Notes |
 | ---- | --- | ----- |
@@ -73,23 +73,23 @@ Print at 0.2mm layer height with supports where needed.
 
 **Notes:**
 
-- This version doesn't include switches or extras.
-- Logic wires aren't shown yet, but I'll add them in a future revision (hopefully).
-- In my first build I messed up my ESP32 and broke the 5V connection. I ended up using another buck converter and using the 3.3V input on it.
+- This diagram doesn't include switches or extras.
+- Logic wires aren't shown yet — I'll add them in a future revision.
+- In my first build, I fried the 5V regulator on my ESP32. I worked around it by adding a second buck converter and powering via the 3.3V pin instead.
 
 ## Assembly
 
-> Note: I had a crap ton of M3 x 20mm screws lying around, so I used those. You can probably use shorter screws for the motor plates but for the main body I'd recommend using at least 20mm screws.
+> **Note:** I used M3 x 20mm screws because I had them lying around. Shorter screws work for the motor plates, but I'd recommend at least 20mm for the main body.
 
-1. Screw the motor plates to the motors, making sure that the motor can still spin.
-2. Screw the motor plates to the bottom half of the main body.
-3. Put the electronics into the main body. I just stuffed everything in there haphazardly
-4. Screw the top half of the main body to the motor plates.
-5. Screw the middle of the main bodies together.
+1. Attach the motor plates to the motors, ensuring the motors can still spin freely.
+2. Mount the motor plates to the bottom half of the main body.
+3. Install the electronics inside the main body.
+4. Attach the top half of the main body to the motor plates.
+5. Secure the two body halves together.
 
 ## Code
 
-The code is in `/code`. It's a simple web server that controls the robot. You can connect to the robot's WiFi and then connect to the web server to control it. It has joystick controls for throttle and rotation, or you can use WASD keys on a computer for throttle and rotation.
+The code is in `/code`. It runs a simple web server for controlling the drone. Connect to the drone's WiFi, open the web interface, and drive using on-screen joystick controls or WASD keys on a keyboard.
 
 ## License
 
