@@ -78,8 +78,8 @@ void setMotor(int pwmPin, int inA, int inB, int speed) {
 }
 
 void updateMotors() {
-  int left = constrain(throttle + rotation, -100, 100);
-  int right = constrain(throttle - rotation, -100, 100);
+  int left = constrain(throttle - rotation, -100, 100);
+  int right = constrain(throttle + rotation, -100, 100);
   
   setMotor(ENA, IN1, IN2, left);
   setMotor(ENB, IN3, IN4, right);
@@ -101,120 +101,269 @@ void handleRoot() {
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body { 
-  font-family: sans-serif; 
-  text-align: center; 
-  background: #111; 
-  color: #fff; 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0a0e27;
+  color: #e0e6ed;
   margin: 0;
-  padding: 20px;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
 }
+
+.container {
+  max-width: 800px;
+  width: 100%;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 50px 0;
+  color: #e0e6ed;
+  letter-spacing: 0.5px;
+}
+
 .controls {
   display: flex;
-  gap: 40px;
-  align-items: center;
-  flex-wrap: wrap;
+  gap: 80px;
   justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
 }
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.joystick-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8892b0;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
 .joy { 
   width: 200px; 
   height: 200px; 
-  background: #333; 
+  background: #111d3c;
+  border: 2px solid #293458;
   border-radius: 50%; 
-  display: inline-block; 
   position: relative; 
-  touch-action: none; 
+  touch-action: none;
+  cursor: grab;
 }
+
+.joy:active {
+  cursor: grabbing;
+}
+
 .knob { 
   width: 60px; 
   height: 60px; 
-  background: #888; 
+  background: #4a7ba7;
   border-radius: 50%; 
   position: absolute; 
   left: 70px; 
-  top: 70px; 
+  top: 70px;
+  cursor: grab;
+  transition: background 0.1s;
 }
-.label {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #aaa;
+
+.knob:active {
+  background: #5a8bc7;
 }
-.keyboard-hint {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background: #222;
-  border-radius: 8px;
+
+.info-section {
+  margin-top: 40px;
+  padding: 24px;
+  background: #111d3c;
+  border: 2px solid #293458;
+  border-radius: 12px;
+}
+
+.info-title {
   font-size: 12px;
-  color: #888;
+  font-weight: 600;
+  color: #8892b0;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0 0 16px 0;
 }
-.led-legend {
-  margin-top: 20px;
-  padding: 15px;
-  background: #222;
-  border-radius: 8px;
-  font-size: 11px;
-  color: #aaa;
-  max-width: 500px;
+
+.keyboard-controls {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
-.led-legend h3 {
-  margin: 0 0 10px 0;
+
+.control-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  background: #1a2847;
+  border: 1px solid #293458;
+  border-radius: 6px;
+  font-weight: 600;
   font-size: 13px;
-  color: #fff;
+  color: #e0e6ed;
 }
-.color-item {
-  display: inline-block;
-  margin: 3px 8px;
+
+.control-desc {
+  font-size: 13px;
+  color: #a0aab8;
 }
-.color-box {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 2px;
-  margin-right: 4px;
-  vertical-align: middle;
+
+.led-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.led-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.led-box {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.led-label {
+  font-size: 12px;
+  color: #a0aab8;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 20px 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .controls {
+    gap: 40px;
+  }
+  
+  .joy {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .knob {
+    width: 48px;
+    height: 48px;
+    left: 56px;
+    top: 56px;
+  }
 }
 </style>
 </head>
 <body>
 
-<h2>Robot Control</h2>
+<div class="container">
+  <h1>Robot Control</h1>
 
-<div class="controls">
-  <div>
-    <div class="joy" id="throttle">
-      <div class="knob"></div>
+  <div class="controls">
+    <div class="control-group">
+      <div class="joystick-label">Throttle</div>
+      <div class="joy" id="throttle">
+        <div class="knob"></div>
+      </div>
     </div>
-    <div class="label">Throttle</div>
+
+    <div class="control-group">
+      <div class="joystick-label">Rotation</div>
+      <div class="joy" id="rotate">
+        <div class="knob"></div>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <div class="joy" id="rotate">
-      <div class="knob"></div>
+  <div class="info-section">
+    <div class="info-title">Keyboard Controls</div>
+    <div class="keyboard-controls">
+      <div class="control-item">
+        <span class="key">W</span>
+        <span class="key">S</span>
+        <span class="control-desc">Throttle</span>
+      </div>
+      <div class="control-item">
+        <span class="key">A</span>
+        <span class="key">D</span>
+        <span class="control-desc">Rotate</span>
+      </div>
     </div>
-    <div class="label">Rotation</div>
+
+    <div class="info-title" style="margin-top: 24px;">LED Status</div>
+    <div class="led-grid">
+      <div class="led-item">
+        <div class="led-box" style="background: white;"></div>
+        <span class="led-label">Forward</span>
+      </div>
+      <div class="led-item">
+        <div class="led-box" style="background: #ff4444;"></div>
+        <span class="led-label">Backward</span>
+      </div>
+      <div class="led-item">
+        <div class="led-box" style="background: #44ff44;"></div>
+        <span class="led-label">Left Turn</span>
+      </div>
+      <div class="led-item">
+        <div class="led-box" style="background: #4444ff;"></div>
+        <span class="led-label">Right Turn</span>
+      </div>
+      <div class="led-item">
+        <div class="led-box" style="background: #00ffff;"></div>
+        <span class="led-label">Forward+Left</span>
+      </div>
+      <div class="led-item">
+        <div class="led-box" style="background: #88ddff;"></div>
+        <span class="led-label">Forward+Right</span>
+      </div>
+      <div class="led-item">
+        <div class="led-box" style="background: #ffff00;"></div>
+        <span class="led-label">Back+Left</span>
+      </div>
+      <div class="led-item">
+        <div class="led-box" style="background: #ff00ff;"></div>
+        <span class="led-label">Back+Right</span>
+      </div>
+    </div>
   </div>
-</div>
-
-<div class="keyboard-hint">
-  Desktop: Use W/S for throttle, A/D for rotation
-</div>
-
-<div class="led-legend">
-  <h3>LED Status Colors</h3>
-  <div class="color-item"><span class="color-box" style="background: white;"></span>Forward</div>
-  <div class="color-item"><span class="color-box" style="background: red;"></span>Backward</div>
-  <div class="color-item"><span class="color-box" style="background: lime;"></span>Left</div>
-  <div class="color-item"><span class="color-box" style="background: blue;"></span>Right</div>
-  <br>
-  <div class="color-item"><span class="color-box" style="background: cyan;"></span>Forward+Left</div>
-  <div class="color-item"><span class="color-box" style="background: lightblue;"></span>Forward+Right</div>
-  <div class="color-item"><span class="color-box" style="background: yellow;"></span>Back+Left</div>
-  <div class="color-item"><span class="color-box" style="background: magenta;"></span>Back+Right</div>
 </div>
 
 <script>
