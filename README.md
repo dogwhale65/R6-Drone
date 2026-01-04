@@ -23,7 +23,7 @@ I'm also *not* an engineer, so apologies if things don't work out perfectly. Thi
 - [x] Initial CAD design
 - [x] Finalize parts list
 - [x] Electronics/wiring diagram
-- [ ] 3D model finalization
+- [X] 3D model finalization
 - [X] Assembly guide
 - [X] Software
 - [ ] Testing
@@ -50,7 +50,7 @@ I'm also *not* an engineer, so apologies if things don't work out perfectly. Thi
 | Camera | Generic Camera Module | [Amazon](https://www.amazon.com/dp/B012UXNDOY) | 1 |
 | Wire Connectors | Lever nuts | [Amazon](https://www.amazon.com/dp/B0CJ5QF3VX) | 1 pack |
 
-> **Heads up:** The motors I picked have a design flaw — some mount holes go straight into the gearbox, so screws can hit the internals and prevent the motor from spinning. 
+> **Heads up:** The motors I picked have a design flaw. Some mount holes go straight into the gearbox, so screws can hit the internals and prevent the motor from spinning. 
 
 ### 3D Printed Parts
 
@@ -60,10 +60,12 @@ Individual 3MF files are in `/3mf`. There's also a ready-to-print 3MF in the roo
 
 | Part | Qty | Notes |
 | ---- | --- | ----- |
-| Main Body Top | 1 | PLA or PETG, 20% infill |
-| Main Body Bottom | 1 | PLA or PETG, 20% infill |
-| Motor Plates | 2 | PLA or PETG 50% infill |
-| Wheels | 2 | TPU, 20% infill |
+| Main Body | 1 | PLA or PETG, 20% infill, 3 walls, supports recommended |
+| Battery Sled | 1 | PLA or PETG, 50% infill, 10 walls, support recommended |
+| Motor Plates | 2 | PLA or PETG 20% infill, 5 walls |
+| Wheels | 2 | TPU or PETG, 20% infill, 2 walls |
+
+>The wheels are still being tested, TPU works better but it doesnt connect to the motor shaft as tight and can result in slipping/falling off. PETG works better but it slips a lot more on harder surfaces such as wooden floors or tile.
 
 Print at 0.2mm layer height with supports where needed.
 
@@ -75,7 +77,16 @@ Print at 0.2mm layer height with supports where needed.
 
 - This diagram doesn't include switches or extras.
 - Logic wires aren't shown yet — I'll add them in a future revision.
-- In my first build, I fried the 5V regulator on my ESP32. I worked around it by adding a second buck converter and powering via the 3.3V pin instead.
+- In my first build, I messed up my ESP32 and broke the 5V connection on my ESP32. I worked around it by adding a second buck converter and powering via the 3.3V pin instead.
+
+Logic wires:
+
+- ENA → GPIO 5
+- IN1 → GPIO 6
+- IN2 → GPIO 7
+- ENB → GPIO 8
+- IN3 → GPIO 9
+- IN4 → GPIO 10
 
 ## Assembly
 
@@ -89,7 +100,9 @@ Print at 0.2mm layer height with supports where needed.
 
 ## Code
 
-The code is in `/code`. It runs a simple web server for controlling the drone. Connect to the drone's WiFi, open the web interface, and drive using on-screen joystick controls or WASD keys on a keyboard.
+The code is in `/code`. It runs a simple web server for controlling the drone. Connect to the drone's WiFi, open the web interface, and drive using on-screen joystick controls or WASD keys on a keyboard. Connect to it by connecting to the drone's WiFi network and visiting `http://192.168.4.1` in your browser. The default password is `password123` on the network `Robot-ESP32`
+
+I am working on a new version that will be able to be controlled via a mobile app through Bluetooth.
 
 ## License
 
