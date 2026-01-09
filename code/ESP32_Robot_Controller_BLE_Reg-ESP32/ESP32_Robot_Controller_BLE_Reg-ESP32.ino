@@ -9,16 +9,16 @@
 #define THROTTLE_CHAR_UUID  "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 #define ROTATION_CHAR_UUID  "1c95d5e3-d8f7-413a-bf3d-7a2e5d7be87e"
 
-// Motor pins
-const int ENA = 5;
-const int IN1 = 6;
-const int IN2 = 7;
-const int ENB = 8;
-const int IN3 = 9;
-const int IN4 = 10;
+// Motor pins - adjusted for WROOM-32
+const int ENA = 25;  // PWM capable pins
+const int IN1 = 26;
+const int IN2 = 27;
+const int ENB = 32;
+const int IN3 = 33;
+const int IN4 = 14;
 
-// RGB LED
-#define RGB_PIN 48
+// RGB LED - changed to a valid WROOM-32 pin
+#define RGB_PIN 13  // GPIO13 is available on WROOM-32
 #define NUM_PIXELS 1
 Adafruit_NeoPixel pixels(NUM_PIXELS, RGB_PIN, NEO_GRB + NEO_KHZ800);
 
@@ -38,61 +38,7 @@ int rotation = 0;
 
 // Watchdog timer for lost commands
 unsigned long lastCommandTime = 0;
-const unsigned long COMMAND_TIMEOUT = 50; // 500ms timeout
-
-// Forward declarations
-void setLED(int r, int g, int b);
-void updateLED();
-void updateMotors();
-
-// Server callbacks for connection status
-class ServerCallbacks: public BLEServerCallbacks {
-    void onConnect(BLEServer* pServer) {
-      deviceConnected = true;
-      Serial.println("Device connected");
-      setLED(0, 255, 0); // Green when connected
-      delay(500);
-      updateLED(); // Return to status LED
-    }
-
-    void onDisconnect(BLEServer* pServer) {
-      deviceConnected = false;
-      Serial.println("Device disconnected");
-      throttle = 0;
-      rotation = 0;
-      updateMotors();
-      setLED(255, 0, 0); // Red when disconnected
-      
-      // Restart advertising
-      BLEDevice::startAdvertising();
-      Serial.println("Waiting for connection...");
-    }
-};
-
-// Characteristic callbacks for receiving control values
-class ControlCallbacks: public BLECharacteristicCallbacks {
-    void onWrite(BLECharacteristic *pCharacteristic) {
-        String value = pCharacteristic->getValue().c_str();
-        
-        if (value.length() > 0) {
-            int val = value.toInt();
-            val = constrain(val, -100, 100); // Safety constraint
-            
-            if (pCharacteristic->getUUID().toString() == THROTTLE_CHAR_UUID) {
-                throttle = val;
-                Serial.print("Throttle: ");
-                Serial.println(throttle);
-            } else if (pCharacteristic->getUUID().toString() == ROTATION_CHAR_UUID) {
-                rotation = val;
-                Serial.print("Rotation: ");
-                Serial.println(rotation);
-            }
-            
-            lastCommandTime = millis(); // Update watchdog timer
-            updateMotors();
-        }
-    }
-};
+const unsigned long COMMAND_TIMEOUT = 500; // 500ms timeout
 
 void setLED(int r, int g, int b) {
   pixels.setPixelColor(0, pixels.Color(r, g, b));
@@ -171,6 +117,55 @@ void checkCommandTimeout() {
   }
 }
 
+// Server callbacks for connection status
+class ServerCallbacks: public BLEServerCallbacks {
+    void onConnect(BLEServer* pServer) {
+      deviceConnected = true;
+      Serial.println("Device connected");
+      setLED(0, 255, 0); // Green when connected
+      delay(500);
+      updateLED(); // Return to status LED
+    }
+
+    void onDisconnect(BLEServer* pServer) {
+      deviceConnected = false;
+      Serial.println("Device disconnected");
+      throttle = 0;
+      rotation = 0;
+      updateMotors();
+      setLED(255, 0, 0); // Red when disconnected
+      
+      // Restart advertising
+      BLEDevice::startAdvertising();
+      Serial.println("Waiting for connection...");
+    }
+};
+
+// Characteristic callbacks for receiving control values
+class ControlCallbacks: public BLECharacteristicCallbacks {
+    void onWrite(BLECharacteristic *pCharacteristic) {
+        String value = pCharacteristic->getValue().c_str();
+        
+        if (value.length() > 0) {
+            int val = value.toInt();
+            val = constrain(val, -100, 100); // Safety constraint
+            
+            if (pCharacteristic->getUUID().toString() == THROTTLE_CHAR_UUID) {
+                throttle = val;
+                Serial.print("Throttle: ");
+                Serial.println(throttle);
+            } else if (pCharacteristic->getUUID().toString() == ROTATION_CHAR_UUID) {
+                rotation = val;
+                Serial.print("Rotation: ");
+                Serial.println(rotation);
+            }
+            
+            lastCommandTime = millis(); // Update watchdog timer
+            updateMotors();
+        }
+    }
+};
+
 void setup() {
   Serial.begin(115200);
   Serial.println("Starting BLE Robot Control...");
@@ -181,6 +176,7 @@ void setup() {
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
 
+  // Setup PWM using new API (works on both S3 and WROOM-32 with newer core)
   ledcAttach(ENA, pwmFreq, pwmResolution);
   ledcAttach(ENB, pwmFreq, pwmResolution);
 
