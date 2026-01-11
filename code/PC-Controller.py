@@ -15,7 +15,6 @@ class RobotControlApp:
         # Create main window
         self.root = tk.Tk()
         self.root.title("ESP32 Robot Test Controller")
-        self.root.geometry("450x500")
         self.root.configure(bg='#f0f0f0')
         
         # BLE variables
