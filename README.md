@@ -28,6 +28,12 @@ I'm also *not* an engineer, so apologies if things don't work out perfectly. Thi
 - [X] Software
 - [ ] Testing
 
+## Future Plans
+
+- Dedicated controller
+- Camera integration
+- Battery level indicator
+
 ## Parts List
 
 ### Electronics
@@ -42,10 +48,8 @@ I'm also *not* an engineer, so apologies if things don't work out perfectly. Thi
 | XT60 Connectors | Male/Female pairs | [Amazon](https://www.amazon.com/dp/B0DB1LBGSH) | 1 pack |
 | Power Switch | Rocker switch 10A, 20mm | [Amazon](https://www.amazon.com/dp/B07QQ22DTB) | 1 |
 | Blue LEDs | 3mm diffused, 12V pre-wired | [Amazon](https://www.amazon.com/dp/B07T8FN8CS) | 1 pack |
-| Resistor Kit | Assortment | [Amazon](https://www.amazon.com/dp/B08FD1XVL6) | 1 pack |
 | Wire | 18AWG silicone, multi-color | [Amazon](https://www.amazon.com/dp/B08BR454BX?th=1) | 1 pack |
 | Heat Shrink | Assorted tubing kit | [Amazon](https://www.amazon.com/dp/B084GDLSCK) | 1 pack |
-| JST Connectors | JST-XH 2.54mm kit | [Amazon](https://www.amazon.com/dp/B0731MZCGF) | 1 pack |
 | LiPo Charger | 3S Charger | [Amazon](https://www.amazon.com/dp/B0B5GRRY59) | 1 |
 | Camera | Generic Camera Module | [Amazon](https://www.amazon.com/dp/B012UXNDOY) | 1 |
 | Wire Connectors | Lever nuts | [Amazon](https://www.amazon.com/dp/B0CJ5QF3VX) | 1 pack |
@@ -56,7 +60,7 @@ I'm also *not* an engineer, so apologies if things don't work out perfectly. Thi
 
 Individual 3MF files are in `/3mf`. There's also a ready-to-print 3MF in the root folder with all parts pre-positioned and print settings configured.
 
-> **Note:** These parts haven't been fully tested yet. Build at your own risk!
+> **Note:** These parts haven't been fully tested yet. They work for the most part, updates will be made as I test/improve them.
 
 | Part | Qty | Notes |
 | ---- | --- | ----- |
@@ -65,7 +69,16 @@ Individual 3MF files are in `/3mf`. There's also a ready-to-print 3MF in the roo
 | Motor Plates | 2 | PLA or PETG 20% infill, 5 walls |
 | Wheels | 2 | TPU or PETG, 20% infill, 2 walls |
 
->The wheels are still being tested, TPU works better but it doesnt connect to the motor shaft as tight and can result in slipping/falling off. PETG works better but it slips a lot more on harder surfaces such as wooden floors or tile.
+> It takes about 9 hours to print the main body and uses almost 400g of filament. I'm trying to incorporate as many features as possible into a single print to minimize this.
+
+>The wheels are still being tested. TPU and PETG slip a lot. I'm currently working on a new design for the wheels, but cant print them at the current moment. I found out that if you just put some rubber bands around the wheels, it works just fine, but they fall off if you take a turn too hard. New wheel design will be posted soon, which has grooves for the rubber bands to stay in place better.
+
+### Wheel Design Iterations
+
+1. Just a simple cutout for the shaft. It stripped the wheels and obviously fell off.
+2. Same principle but I added a screw hole to screw in and clamp onto the D-shaft. Worked good at preventing stripping, but still fell off.
+3. A clamp system that used 2 screws to clamp around the shaft. Worked just about the same as the original wheel. The screws stripped the plastic before any real torque could be applied to it to actually clamp.
+4. Current design, a separate hub that screws both onto/into the D-shaft and the wheel respectively. Haven't printed it yet, but I think it will work.
 
 Print at 0.2mm layer height with supports where needed.
 
@@ -102,7 +115,9 @@ Logic wires:
 
 The code is in `/code`. It runs a simple web server for controlling the drone. Connect to the drone's WiFi, open the web interface, and drive using on-screen joystick controls or WASD keys on a keyboard. Connect to it by connecting to the drone's WiFi network and visiting `http://192.168.4.1` in your browser. The default password is `password123` on the network `Robot-ESP32`
 
-I am working on a new version that will be able to be controlled via a mobile app through Bluetooth.
+I am working on making an actual controller for it, rather than using my phone or a computer. Currently, there's a Bluetooth version for mobile app control.
+
+
 
 ## License
 
