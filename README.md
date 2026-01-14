@@ -13,20 +13,12 @@ I'm building a functional, 3D-printable version of the drone from R6 Siege. It f
 
 Still early days — I've got the motors picked out and a rough CAD design, but there's plenty left to figure out.
 
+![Full CAD Design](images/Full-CAD-V16.png)
+
 The drone was designed to fit on a BambuLab P1S, so it may not be perfectly accurate to the in-game model. If anyone has the correct dimensions and wants to share them, I'm all ears!
 
 I'm also *not* an engineer, so apologies if things don't work out perfectly. This is my first real project, and I'm learning as I go.
 
-## Progress
-
-- [x] Motor selection
-- [x] Initial CAD design
-- [x] Finalize parts list
-- [x] Electronics/wiring diagram
-- [X] 3D model finalization
-- [X] Assembly guide
-- [X] Software
-- [ ] Testing
 
 ## Future Plans
 
